@@ -44,6 +44,18 @@ public class Paddle : MonoBehaviour
             Ball ballData = ball.GetComponent<Ball>();
             ballData.xDir *= -1.0f;
 
+            // Move ball up if above paddle
+            if (ball.transform.position.y > transform.position.y)
+            {
+                ballData.yDir = 1.0f;
+            }
+
+            // Move ball down if below paddle
+            if (ball.transform.position.y > transform.position.y)
+            {
+                ballData.yDir = -1.0f;
+            }
+
             // Homework: modify this script such that
             // if the ball collides with the top half of the paddle, move the ball up
             // if the ball collides with the bottom half of the paddle, move the ball down
