@@ -16,22 +16,22 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKey(KeyCode.W))
         {
             rb.velocity = new Vector2(0.0f, speed);
         }
 
-        else if (Input.GetKeyDown(KeyCode.S))
+        else if (Input.GetKey(KeyCode.S))
         {
             rb.velocity = new Vector2(0.0f, -speed);
         }
 
-        else if (Input.GetKeyDown(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A))
         {
             rb.velocity = new Vector2(-speed, 0.0f);
         }
 
-        else if (Input.GetKeyDown(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D))
         {
             rb.velocity = new Vector2(speed, 0.0f);
         }
