@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Homework:
-// When the player overlaps with either SpeedCircle or SpeedSquare, their speed doubles.
-// When the player stops overlapping with either SpeedCircle or SpeedSquare, their speed resets.
+// When the player overlaps with any SPEED_UP gameObject, their speed doubles.
+// When the player overlaps with any SPEED_DOWN gameObject, their speed halves.
+// When the player stops overlapping with any SPEED_UP or SPEED_DOWN gameObject, their speed resets.
 // (See https://docs.unity3d.com/Manual/CollidersOverview.html for more info on collisions).
 public class TriggerTest : MonoBehaviour
 {
