@@ -20,15 +20,18 @@ public class TriggerTest : MonoBehaviour
     // Runs once on-enter
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.name == "SpeedRectangle")
+        ColliderTag tag = collision.GetComponent<ColliderTag>();
+        if (tag != null)
         {
-            player.speed *= 2.0f;
-            Debug.Log("Speeding up!");
-        }
-        else if (collision.name == "SlowCircle")
-        {
-            player.speed /= 2.0f;
-            Debug.Log("Slowing down...");
+            if (tag.type == ColliderTag.Type.SPEED_UP)
+            {
+                player.speed *= 2.0f;
+            }
+
+            else if (tag.type == ColliderTag.Type.SPEED_DOWN)
+            {
+                player.speed /= 2.0f;
+            }
         }
     }
 
