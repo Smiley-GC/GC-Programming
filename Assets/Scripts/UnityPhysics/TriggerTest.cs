@@ -8,27 +8,33 @@ using UnityEngine;
 // (See https://docs.unity3d.com/Manual/CollidersOverview.html for more info on collisions).
 public class TriggerTest : MonoBehaviour
 {
+    float initialSpeed;
+    Player player;
+
+    private void Start()
+    {
+        player = GetComponent<Player>();
+        initialSpeed = player.speed;
+    }
+
     // Runs once on-enter
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // *= is the same as assigning a variable to itself times a number
-        //float a = 1.0f;
-        //a = a * 2.0f;
-        //a *= 2.0f;
-        gameObject.GetComponent<Player>().speed *= 2.0f;
-        Debug.Log("Speeding up!");
+        if (collision.name == "SpeedRectangle")
+        {
+            player.speed *= 2.0f;
+            Debug.Log("Speeding up!");
+        }
+        else if (collision.name == "SlowCircle")
+        {
+            player.speed /= 2.0f;
+            Debug.Log("Slowing down...");
+        }
     }
-
-    // Runs on repeat every frame the gameObject is moving within the collision area
-    //private void OnTriggerStay2D(Collider2D collision)
-    //{
-    //    Debug.Log(name + " is continuing to be triggered by " + collision.name);
-    //}
 
     // Runs once on-exit
     private void OnTriggerExit2D(Collider2D collision)
     {
-        gameObject.GetComponent<Player>().speed /= 2.0f;
-        Debug.Log("Slowing down...");
+        player.speed = initialSpeed;
     }
 }
