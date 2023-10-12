@@ -11,7 +11,12 @@ public class TriggerTest : MonoBehaviour
     // Runs once on-enter
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(name + " is triggered by " + collision.name);
+        // *= is the same as assigning a variable to itself times a number
+        //float a = 1.0f;
+        //a = a * 2.0f;
+        //a *= 2.0f;
+        gameObject.GetComponent<Player>().speed *= 2.0f;
+        Debug.Log("Speeding up!");
     }
 
     // Runs on repeat every frame the gameObject is moving within the collision area
@@ -23,6 +28,7 @@ public class TriggerTest : MonoBehaviour
     // Runs once on-exit
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log(name + " is no longer being triggered by " + collision.name);
+        gameObject.GetComponent<Player>().speed /= 2.0f;
+        Debug.Log("Slowing down...");
     }
 }
