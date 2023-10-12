@@ -5,6 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float speed = 0.0f;
+    float rotation = 0.0f;
+    float rotationSpeed = 100.0f;
     Rigidbody2D rb;
 
     void Start()
@@ -21,13 +23,14 @@ public class Player : MonoBehaviour
     // Challenge: Rotate the player with E and Q, then move the player in that direction!
     void Update()
     {
+        float dt = Time.deltaTime;
         float xDir = 0.0f;
         float yDir = 0.0f;
         if (Input.GetKey(KeyCode.W))
         {
             yDir = 1.0f;
         }
-
+        
         else if (Input.GetKey(KeyCode.S))
         {
             yDir = -1.0f;
@@ -43,7 +46,17 @@ public class Player : MonoBehaviour
             xDir = 1.0f;
         }
 
+        if (Input.GetKey(KeyCode.E))
+        {
+            rotation -= rotationSpeed * dt;
+        }
+        else if (Input.GetKey(KeyCode.Q))
+        {
+            rotation += rotationSpeed * dt;
+        }
+
         Vector2 direction = new Vector2(xDir, yDir).normalized;
         rb.velocity = direction * speed;
+        transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotation);
     }
 }
