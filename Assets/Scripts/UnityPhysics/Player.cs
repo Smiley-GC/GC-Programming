@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     public float speed = 0.0f;
     float rotation = 0.0f;
-    float rotationSpeed = 100.0f;
+    float rotationSpeed = 250.0f;
     Rigidbody2D rb;
 
     void Start()
@@ -24,28 +24,8 @@ public class Player : MonoBehaviour
     void Update()
     {
         float dt = Time.deltaTime;
-        float xDir = 0.0f;
-        float yDir = 0.0f;
-        if (Input.GetKey(KeyCode.W))
-        {
-            yDir = 1.0f;
-        }
-        
-        else if (Input.GetKey(KeyCode.S))
-        {
-            yDir = -1.0f;
-        }
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            xDir = -1.0f;
-        }
-
-        else if (Input.GetKey(KeyCode.D))
-        {
-            xDir = 1.0f;
-        }
-
+        // 1. Update direction based on rotation
         if (Input.GetKey(KeyCode.E))
         {
             rotation -= rotationSpeed * dt;
@@ -54,9 +34,32 @@ public class Player : MonoBehaviour
         {
             rotation += rotationSpeed * dt;
         }
-
-        Vector2 direction = new Vector2(xDir, yDir).normalized;
-        rb.velocity = direction * speed;
         transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotation);
+        Vector3 forward = transform.right;
+        Vector3 right = transform.up;
+
+        // 2. Move along direction
+        if (Input.GetKey(KeyCode.W))
+        {
+            transform.position += forward * speed * dt;
+        }
+        
+        else if (Input.GetKey(KeyCode.S))
+        {
+            transform.position -= forward * speed * dt;
+        }
+        
+        if (Input.GetKey(KeyCode.A))
+        {
+            transform.position += right * speed * dt;
+        }
+        
+        else if (Input.GetKey(KeyCode.D))
+        {
+            transform.position -= right * speed * dt;
+        }
+
+        float lineLength = 10.0f;
+        Debug.DrawLine(transform.position, transform.position + transform.right * lineLength);
     }
 }
