@@ -7,13 +7,18 @@ public class Player : MonoBehaviour
     public float speed = 0.0f;
     Rigidbody2D rb;
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        // Normalization test (matches math diagram)
+        Vector2 test = new Vector2(3, 5);
+        Vector2 nTest = test.normalized;
+        Debug.Log(nTest);
+        Debug.Log(nTest.magnitude);
     }
 
-    // Update is called once per frame
+    // Challenge: Rotate the player with E and Q, then move the player in that direction!
     void Update()
     {
         float xDir = 0.0f;
@@ -28,7 +33,7 @@ public class Player : MonoBehaviour
             yDir = -1.0f;
         }
 
-        else if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A))
         {
             xDir = -1.0f;
         }
@@ -38,6 +43,7 @@ public class Player : MonoBehaviour
             xDir = 1.0f;
         }
 
-        rb.velocity = new Vector2(xDir, yDir) * speed;
+        Vector2 direction = new Vector2(xDir, yDir).normalized;
+        rb.velocity = direction * speed;
     }
 }
