@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
             yDir = -1.0f;
         }
 
-        else if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A))
         {
             xDir = -1.0f;
         }
@@ -38,6 +38,6 @@ public class Player : MonoBehaviour
             xDir = 1.0f;
         }
 
-        rb.velocity = new Vector2(xDir, yDir) * speed;
+        rb.velocity = new Vector2(xDir, yDir).normalized * speed;
     }
 }
