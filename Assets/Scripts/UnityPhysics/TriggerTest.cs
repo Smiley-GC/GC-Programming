@@ -8,21 +8,22 @@ using UnityEngine;
 // (See https://docs.unity3d.com/Manual/CollidersOverview.html for more info on collisions).
 public class TriggerTest : MonoBehaviour
 {
+    Player player;
+
+    private void Start()
+    {
+        player = GetComponent<Player>();
+    }
+
     // Runs once on-enter
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(name + " is triggered by " + collision.name);
+        player.speed *= 2.0f;
     }
-
-    // Runs on repeat every frame the gameObject is moving within the collision area
-    //private void OnTriggerStay2D(Collider2D collision)
-    //{
-    //    Debug.Log(name + " is continuing to be triggered by " + collision.name);
-    //}
 
     // Runs once on-exit
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log(name + " is no longer being triggered by " + collision.name);
+        player.speed /= 2.0f;
     }
 }
