@@ -18,8 +18,17 @@ public class Player : MonoBehaviour
     void Update()
     {
         float dt = Time.deltaTime;
-        //transform.rotation = transform.rotation * Quaternion.Euler(0.0f, 0.0f, rotationSpeed * dt);
-        // Challenge: Rotate left when Q is down, rotate right when E is down.
+        Quaternion rotation = Quaternion.identity;
+        if (Input.GetKey(KeyCode.Q))
+        {
+            rotation = Quaternion.Euler(0.0f, 0.0f, rotationSpeed * dt);
+        }
+
+        else if (Input.GetKey(KeyCode.E))
+        {
+            rotation = Quaternion.Euler(0.0f, 0.0f, -rotationSpeed * dt);
+        }
+        transform.rotation *= rotation;
 
         //float xDir = 0.0f;
         //float yDir = 0.0f;
