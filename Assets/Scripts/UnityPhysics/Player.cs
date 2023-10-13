@@ -12,46 +12,63 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        // Normalization proof:
+        Vector2 test = new Vector2(7, 8);
+        float magnitude = test.magnitude;
+        float x = test.x / magnitude;
+        float y = test.y / magnitude;
+        Vector2 nTest = new Vector2(x, y);
+        Debug.Log(test);
+        Debug.Log(nTest);           // manual normalization
+        Debug.Log(test.normalized); // automatic normalization
+        Debug.Log(magnitude);
     }
 
     // Update is called once per frame
     void Update()
     {
         float dt = Time.deltaTime;
+        float translationDelta = speed * dt;
+        float rotationDelta = rotationSpeed * dt;
+
         Quaternion rotation = Quaternion.identity;
         if (Input.GetKey(KeyCode.Q))
         {
-            rotation = Quaternion.Euler(0.0f, 0.0f, rotationSpeed * dt);
+            rotation = Quaternion.Euler(0.0f, 0.0f, rotationDelta);
         }
 
         else if (Input.GetKey(KeyCode.E))
         {
-            rotation = Quaternion.Euler(0.0f, 0.0f, -rotationSpeed * dt);
+            rotation = Quaternion.Euler(0.0f, 0.0f, -rotationDelta);
         }
         transform.rotation *= rotation;
 
-        //float xDir = 0.0f;
-        //float yDir = 0.0f;
-        //if (Input.GetKey(KeyCode.W))
-        //{
-        //    yDir = 1.0f;
-        //}
-        //
-        //else if (Input.GetKey(KeyCode.S))
-        //{
-        //    yDir = -1.0f;
-        //}
-        //
-        //if (Input.GetKey(KeyCode.A))
-        //{
-        //    xDir = -1.0f;
-        //}
-        //
-        //else if (Input.GetKey(KeyCode.D))
-        //{
-        //    xDir = 1.0f;
-        //}
-        //
-        //rb.velocity = new Vector2(xDir, yDir).normalized * speed;
+        Vector3 forward = transform.right;
+        Vector3 left = transform.up;
+        float lineLength = 10.0f;
+
+        Debug.DrawLine(transform.position, transform.position + forward * lineLength);
+        Debug.DrawLine(transform.position, transform.position + left * lineLength);
+
+        if (Input.GetKey(KeyCode.W))
+        {
+            transform.position += forward * translationDelta;
+        }
+
+        else if (Input.GetKey(KeyCode.S))
+        {
+            transform.position -= forward * translationDelta;
+        }
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            transform.position += left * translationDelta;
+        }
+
+        else if (Input.GetKey(KeyCode.D))
+        {
+            transform.position -= left * translationDelta;
+        }
     }
 }
