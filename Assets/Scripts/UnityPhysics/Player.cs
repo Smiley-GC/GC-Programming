@@ -14,15 +14,15 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         // Normalization proof:
-        Vector2 test = new Vector2(7, 8);
-        float magnitude = test.magnitude;
-        float x = test.x / magnitude;
-        float y = test.y / magnitude;
-        Vector2 nTest = new Vector2(x, y);
-        Debug.Log(test);
-        Debug.Log(nTest);           // manual normalization
-        Debug.Log(test.normalized); // automatic normalization
-        Debug.Log(magnitude);
+        //Vector2 test = new Vector2(7, 8);
+        //float magnitude = test.magnitude;
+        //float x = test.x / magnitude;
+        //float y = test.y / magnitude;
+        //Vector2 nTest = new Vector2(x, y);
+        //Debug.Log(test);
+        //Debug.Log(nTest);           // manual normalization
+        //Debug.Log(test.normalized); // automatic normalization
+        //Debug.Log(magnitude);
     }
 
     // Update is called once per frame
