@@ -4,12 +4,8 @@ using UnityEngine;
 
 public class Functions : MonoBehaviour
 {
+    public GameObject prefab;
     float speed = 10.0f;
-
-    void Test()
-    {
-        Debug.Log("Testing... 1, 2, 3!");
-    }
 
     void MovePlayer(float speed, float dt)
     {
@@ -23,12 +19,13 @@ public class Functions : MonoBehaviour
 
     void Start()
     {
-        Test();
+        Instantiate(prefab, new Vector3(0.0f, 5.0f, 0.0f), Quaternion.identity);
     }
 
     void Update()
     {
         float tt = Time.realtimeSinceStartup;
+        Debug.Log(tt);
         float dt = Time.deltaTime;
         //MovePlayer(10.0f, dt);
         Vector3 positionDelta = MoveObject(new Vector3(Mathf.Cos(tt), 0.0f, Mathf.Sin(tt)), speed, dt);
