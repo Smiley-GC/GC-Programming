@@ -9,6 +9,11 @@ public class Functions : MonoBehaviour
         Debug.Log("Testing... 1, 2, 3!");
     }
 
+    void MovePlayer(float speed)
+    {
+        transform.position += Vector3.forward * speed * Time.deltaTime;
+    }
+
     void Start()
     {
         Test();
@@ -16,6 +21,6 @@ public class Functions : MonoBehaviour
 
     void Update()
     {
-        
+        MovePlayer(10.0f);
     }
 }
