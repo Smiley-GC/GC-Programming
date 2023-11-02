@@ -17,18 +17,30 @@ public class Functions : MonoBehaviour
         return direction * speed * dt;
     }
 
+    void ThrowGrenade(Vector3 position, Vector3 velocity)
+    {
+        GameObject grenade = Instantiate(prefab, position, Quaternion.identity);
+        grenade.GetComponent<Rigidbody>().velocity = velocity;
+    }
+
     void Start()
     {
-        Instantiate(prefab, new Vector3(0.0f, 5.0f, 0.0f), Quaternion.identity);
+        //Instantiate(prefab, new Vector3(0.0f, 5.0f, 0.0f), Quaternion.identity);
     }
 
     void Update()
     {
         float tt = Time.realtimeSinceStartup;
-        Debug.Log(tt);
         float dt = Time.deltaTime;
         //MovePlayer(10.0f, dt);
         Vector3 positionDelta = MoveObject(new Vector3(Mathf.Cos(tt), 0.0f, Mathf.Sin(tt)), speed, dt);
-        transform.position += positionDelta;
+        //transform.position += positionDelta;
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Vector3 forward = transform.forward;
+            Vector3 up = transform.up;
+            Vector3 direction = (up + forward).normalized;
+            ThrowGrenade(transform.position + new Vector3(0.0f, 1.5f, 0.0f), direction * 10.0f);
+        }
     }
 }
