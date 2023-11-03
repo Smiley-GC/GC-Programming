@@ -4,20 +4,13 @@ using UnityEngine;
 
 public class Functions : MonoBehaviour
 {
-    void Test()
+    void MovePlayer(float speed)
     {
-        Debug.Log("Testing... 1, 2, 3!");
+        transform.position += Vector3.forward * speed * Time.deltaTime;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        Test();
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        
+        MovePlayer(10.0f);
     }
 }
