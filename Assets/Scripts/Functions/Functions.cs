@@ -19,6 +19,7 @@ public class Functions : MonoBehaviour
     void Update()
     {
         //MovePlayer(10.0f);
-        transform.position += MoveObject(transform.right, speed);
+        //transform.position += MoveObject(transform.right, speed);
+        //transform.position += transform.right * speed * Time.deltaTime;
     }
 }
