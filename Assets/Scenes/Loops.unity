@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grenade: {fileID: 2065529316352684691, guid: 8897e46d337c2fb4e8cfdc8bcc68517c, type: 3}
-  spawnPosition: {x: 0, y: 10, z: 0}
+  spawnPosition: {x: 0, y: 25, z: 0}
 --- !u!4 &245792931
 Transform:
   m_ObjectHideFlags: 0

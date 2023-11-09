@@ -38,11 +38,23 @@ public class Loops : MonoBehaviour
     {
         for (int i = 0; i < grenadeCount; i++)
         {
-            float xMin, xMax, zMin, zMax;
-            xMin = zMin = -100.0f;
-            xMax = zMax = 100.0f;
-            Vector3 grenadePosition = spawnPosition + new Vector3(Random.Range(xMin, xMax), 0.0f, Random.Range(zMin, zMax));
-            Destroy(Instantiate(grenade, grenadePosition, Quaternion.identity), 5.0f);
+            for (float j = 0.0f; j < 50.0f; j += 10.0f)
+            {
+                float xMin, xMax, zMin, zMax;
+                xMin = zMin = -100.0f;
+                xMax = zMax = 100.0f;
+                Vector3 grenadePosition = spawnPosition + new Vector3(Random.Range(xMin, xMax), j, Random.Range(zMin, zMax));
+                GameObject clone = Instantiate(grenade, grenadePosition, Quaternion.identity);
+                Destroy(clone, 5.0f);
+            }
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SpawnGrenades(100);
         }
     }
 }
