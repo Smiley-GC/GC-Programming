@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Seek : MonoBehaviour
 {
-    // Homework: if the AI has detected the player, shoot at it!
+    // Homework task 1: if the AI has detected the player, shoot at it (1%)!
     public GameObject target;
     float speed = 2.0f;
     bool seeking = false;

@@ -4,18 +4,9 @@ using UnityEngine;
 
 public class Grenade : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    // TODO -- make an actual explosion!
+    // https://learn.unity.com/tutorial/introduction-to-particle-systems
+    // https://docs.unity3d.com/ScriptReference/ParticleSystem.html
     private void OnDestroy()
     {
         Debug.Log("BOOM!");
