@@ -15,4 +15,9 @@ public class Grenade : MonoBehaviour
     {
         
     }
+
+    private void OnDestroy()
+    {
+        Debug.Log("BOOM!");
+    }
 }
