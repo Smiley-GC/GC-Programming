@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public GameObject grenade;  // prefab
+    public GameObject Bonus;  // prefab
     Rigidbody rb;
     float speed = 10.0f;
 
@@ -47,6 +48,12 @@ public class PlayerMovement : MonoBehaviour
             GameObject clone = Instantiate(grenade, grenadePosition, Quaternion.identity);
             clone.GetComponent<Rigidbody>().velocity = grenadeDirection * speed;
             Destroy(clone, 5.0f);
+        }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            GameObject BonusVisible = Instantiate(Bonus, new Vector3(25, 4, 4), Quaternion.Euler(0,-90,0));
+            BonusVisible.active = true;
         }
     }
 }

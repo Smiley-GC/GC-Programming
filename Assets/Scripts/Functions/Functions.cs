@@ -16,6 +16,7 @@ public class Functions : MonoBehaviour
 {
     float speed = 10.0f;
 
+
     void MovePlayer(float speed)
     {
         transform.position += Vector3.forward * speed * Time.deltaTime;
@@ -28,7 +29,44 @@ public class Functions : MonoBehaviour
 
     void Update()
     {
+        float floatone = 10.0f;
+        float floattwo = 5.0f;
+
+        float multresult = MultNumbers(floatone, floattwo);
+        Debug.Log(multresult);
+
+        float divresult = DivNumbers(floatone, floattwo);
+        Debug.Log(divresult);
+
+        float addresult = AddNumbers(floatone, floattwo);
+        Debug.Log(addresult);
+
+        float subresult = SubNumbers(floatone, floattwo);
+        Debug.Log(subresult);
+
+
+
         float tt = Time.realtimeSinceStartup;
-        transform.position += MoveObject(new Vector3(Mathf.Cos(tt), 0.0f, Mathf.Sin(tt)), speed);
+        //transform.position += MoveObject(new Vector3(Mathf.Cos(tt), 0.0f, Mathf.Sin(tt)), speed);
+        transform.position -= MoveObject(new Vector3(Mathf.Cos(tt), 0.0f, Mathf.Sin(tt)), speed);
     }
+
+
+    float MultNumbers(float floatone, float floattwo)
+    {
+        return floatone * floattwo;
+    }
+    float DivNumbers(float floatone, float floattwo)
+    {
+        return floatone / floattwo;
+    }
+    float AddNumbers(float floatone, float floattwo)
+    {
+        return floatone + floattwo;
+    }
+    float SubNumbers(float floatone, float floattwo)
+    {
+        return floatone - floattwo;
+    }
+
 }
