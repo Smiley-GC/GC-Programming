@@ -14,7 +14,7 @@ using UnityEngine;
 // A function that spawns and/or moves objects is considered "awesome" and will give full marks.
 public class Functions : MonoBehaviour
 {
-    float speed = 10.0f;
+    float movementSpeed = 10.0f;
 
     void MovePlayer(float speed)
     {
@@ -28,7 +28,8 @@ public class Functions : MonoBehaviour
 
     void Update()
     {
-        float tt = Time.realtimeSinceStartup;
-        transform.position += MoveObject(new Vector3(Mathf.Cos(tt), 0.0f, Mathf.Sin(tt)), speed);
+        transform.position += MoveObject(transform.forward, movementSpeed);
+        //float tt = Time.realtimeSinceStartup;
+        //transform.position += MoveObject(new Vector3(Mathf.Cos(tt), 0.0f, Mathf.Sin(tt)), speed);
     }
 }

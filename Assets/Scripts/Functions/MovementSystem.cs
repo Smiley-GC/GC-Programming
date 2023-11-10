@@ -20,11 +20,10 @@ public class MovementSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 direction = (Vector3.forward + Vector3.right).normalized;
-        object1.transform.position += MoveObject(direction, speed);
-        object2.transform.position += MoveObject(direction, speed);
-        object3.transform.position += MoveObject(direction, speed);
-        object4.transform.position += MoveObject(direction, speed);
-        object5.transform.position += MoveObject(direction, speed);
+        object1.transform.position += MoveObject(object1.transform.forward, speed);
+        object2.transform.position += MoveObject(object2.transform.forward, speed);
+        object3.transform.position += MoveObject(object3.transform.forward, speed);
+        object4.transform.position += MoveObject(object4.transform.forward, speed);
+        object5.transform.position += MoveObject(object5.transform.forward, speed);
     }
 }
