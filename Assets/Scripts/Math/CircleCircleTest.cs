@@ -2,16 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CircleCircleDetection : MonoBehaviour
+public class CircleCircleTest : MonoBehaviour
 {
     public GameObject circle1;
     public GameObject circle2;
 
-    // Homework: create a function to detect if the two circles are overlapping
-    // Recommendation: the function should take in two positions, and two radiuses
-    // The function should check if the distance between centres is less than or
-    // equal to the sum of the radii. If so, colour the circles green, otherwise red.
-
+    // Homework: write a function to determine if two circles are overlapping
+    // Recommendation: keep your functions pure math -- take in 2 positions and 2 radii as arguments
+    // return the result of the collision as a boolean
     void Update()
     {
         bool collision = false;
