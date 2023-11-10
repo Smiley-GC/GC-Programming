@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class Loops : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        while (true)
+        {
+            Debug.Log("Looping");
+            break;
+        }
+        Debug.Log("No longer looping");
     }
 }
