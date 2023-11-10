@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Homework task 1: create a border around your screen by spawning game objects via loop.
+// See diagram on blackboard for refernece
 public class Loops : MonoBehaviour
 {
     public GameObject grenadePrefab;
@@ -38,11 +40,14 @@ public class Loops : MonoBehaviour
     {
         for (int i = 0; i < grenadeCount; i++)
         {
-            float min = -100.0f;
-            float max =  100.0f;
-            Vector3 grenadePosition = new Vector3(Random.Range(min, max), verticalPosition + Random.Range(-10.0f, 10.0f), Random.Range(min, max));
-            GameObject grenade = Instantiate(grenadePrefab, grenadePosition, Quaternion.identity);
-            Destroy(grenade, 5.0f);
+            for (float j = -5.0f; j <= 5.0f; j += 5.0f)
+            {
+                float min = -100.0f;
+                float max = 100.0f;
+                Vector3 grenadePosition = new Vector3(Random.Range(min, max), verticalPosition + Random.Range(-10.0f, 10.0f) + j, Random.Range(min, max));
+                GameObject grenade = Instantiate(grenadePrefab, grenadePosition, Quaternion.identity);
+                Destroy(grenade, 5.0f);
+            }
         }
     }
 }
