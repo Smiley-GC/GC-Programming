@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Homework task 2: make the enemy shoot at the player when in proximity
 public class Seek : MonoBehaviour
 {
     public GameObject target;
