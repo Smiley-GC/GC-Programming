@@ -6,10 +6,11 @@ public class Loops : MonoBehaviour
 {
     void Start()
     {
-        while (true)
+        int counter = 1;
+        while (counter <= 5)
         {
-            Debug.Log("Looping");
-            break;
+            Debug.Log("Looping x" + counter);
+            counter++;
         }
         Debug.Log("No longer looping");
     }
