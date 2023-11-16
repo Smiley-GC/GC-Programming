@@ -36,18 +36,19 @@ public class Loops : MonoBehaviour
 
     void SpawnGrenades(int grenadeCount)
     {
+        // Homework 7 recommendations:
+        // 1. Write 4 for-loops -- 1 for each strip of the screen
+        // 2. (Alternatively), write one for loop, and test if the grenades are too far inwards
+        // perhaps use a collision volume (ie OnTriggerEnter), or just simple if-statements!
         for (int i = 0; i < grenadeCount; i++)
         {
-            for (float j = 0.0f; j < 50.0f; j += 10.0f)
-            {
-                float xMin, xMax, zMin, zMax;
-                xMin = zMin = -100.0f;
-                xMax = zMax = 100.0f;
+            float xMin, xMax, zMin, zMax;
+            xMin = zMin = -100.0f;
+            xMax = zMax = 100.0f;
 
-                Vector3 grenadePosition = spawnPosition + new Vector3(Random.Range(xMin, xMax), j, Random.Range(zMin, zMax));
-                GameObject clone = Instantiate(grenade, grenadePosition, Quaternion.identity);
-                Destroy(clone, 5.0f);
-            }
+            Vector3 grenadePosition = spawnPosition + new Vector3(Random.Range(xMin, xMax), 0.0f, Random.Range(zMin, zMax));
+            GameObject clone = Instantiate(grenade, grenadePosition, Quaternion.identity);
+            Destroy(clone, 5.0f);
         }
     }
 

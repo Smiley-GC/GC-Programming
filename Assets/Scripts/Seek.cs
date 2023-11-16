@@ -6,6 +6,7 @@ public class Seek : MonoBehaviour
 {
     // Homework task 1: if the AI has detected the player, shoot at it (1%)!
     public GameObject target;
+    public GameObject projectile;   // TODO -- instantiate this prefab and fire it at the player
     float speed = 2.0f;
     bool seeking = false;
 
@@ -19,7 +20,6 @@ public class Seek : MonoBehaviour
         seeking = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         float dt = Time.deltaTime;
