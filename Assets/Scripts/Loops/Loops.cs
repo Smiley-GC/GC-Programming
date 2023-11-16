@@ -9,25 +9,25 @@ public class Loops : MonoBehaviour
     public Vector3 spawnPosition;
     void Start()
     {
-        //TestWhileLoop();
-        //TestForLoop();
+        TestWhileLoop();
+        TestForLoop();
         SpawnGrenades(420);
     }
 
     void TestWhileLoop()
     {
-        int counter = 1;
-        while (counter <= 5)
+        int counter = 0;
+        while (counter <= 10)
         {
             Debug.Log("Looping x" + counter);
-            counter++;
+            counter += 2;
         }
         Debug.Log("No longer looping");
     }
 
     void TestForLoop()
     {
-        for (int counter = 1; counter <= 5; counter++)
+        for (int counter = 5; counter > 0; counter--)
         {
             Debug.Log("Looping x" + counter);
         }
@@ -43,6 +43,7 @@ public class Loops : MonoBehaviour
                 float xMin, xMax, zMin, zMax;
                 xMin = zMin = -100.0f;
                 xMax = zMax = 100.0f;
+
                 Vector3 grenadePosition = spawnPosition + new Vector3(Random.Range(xMin, xMax), j, Random.Range(zMin, zMax));
                 GameObject clone = Instantiate(grenade, grenadePosition, Quaternion.identity);
                 Destroy(clone, 5.0f);
