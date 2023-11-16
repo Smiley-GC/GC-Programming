@@ -12,6 +12,30 @@ public class Collections : MonoBehaviour
     void Start()
     {
         Debug.Log("Automatic array length: " + automaticArray.Length);
+        // Change single value:
+        automaticArray[0] = 42;
+        Debug.Log(automaticArray[0]);
+
+        // Change multiple values:
+        for (int i = 0; i < automaticArray.Length; i++)
+        {
+            automaticArray[i] = 69420;
+            Debug.Log(automaticArray[i]);
+        }
+
+        // Change all values to count upwards
+        for (int i = 0; i < automaticArray.Length; i++)
+        {
+            automaticArray[i] = i + 1;
+            Debug.Log(automaticArray[i]);
+        }
+
+        // Change all values to count downwards
+        for (int i = 0; i < automaticArray.Length; i++)
+        {
+            automaticArray[i] = automaticArray.Length - i;
+            Debug.Log(automaticArray[i]);
+        }
     }
 
     // Update is called once per frame
