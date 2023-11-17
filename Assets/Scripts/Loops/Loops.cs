@@ -8,12 +8,21 @@ public class Loops : MonoBehaviour
 {
     public GameObject grenadePrefab;
     public float verticalPosition;
+    int grenadeCount = 256;
 
     void Start()
     {
-        //TestWhileLoop();
-        //TestForLoop();
-        SpawnGrenades(256);
+        TestWhileLoop();
+        TestForLoop();
+        SpawnGrenades(grenadeCount);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            SpawnGrenades(grenadeCount);
+        }
     }
 
     void TestWhileLoop()
@@ -22,14 +31,14 @@ public class Loops : MonoBehaviour
         while (counter <= 5)
         {
             Debug.Log("Looping x" + counter);
-            counter++;
+            counter += 2;
         }
         Debug.Log("No longer looping");
     }
     
     void TestForLoop()
     {
-        for (int counter = 1; counter <= 5; counter++)
+        for (int counter = 1; counter <= 10; counter +=3)
         {
             Debug.Log("Looping x" + counter);
         }
