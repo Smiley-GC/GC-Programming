@@ -6,6 +6,7 @@ public class CircleCircleDetection : MonoBehaviour
 {
     public GameObject circle1;
     public GameObject circle2;
+    public GameObject circle3;  // controlled by mouse cursor for testing
 
     // Homework 8: Upgrade our CheckCollisionCircles function to resolve collision between two circles by applying the mtv.
     // Calculate the mtv's direction by determining the direction from 2 to 1 (subtract 1 from 2 then normalize the result)
@@ -40,6 +41,12 @@ public class CircleCircleDetection : MonoBehaviour
 
     void Update()
     {
+        // Get mouse position in screen-space, then convert it to world-space
+        Vector3 mouse = Input.mousePosition;
+        mouse = Camera.main.ScreenToWorldPoint(mouse);
+        mouse.z = 0.0f;
+        circle3.transform.position = mouse;
+
         Vector2 position1 = circle1.transform.position;
         Vector2 position2 = circle2.transform.position;
         float radius1 = circle1.transform.localScale.x * 0.5f;
@@ -53,11 +60,11 @@ public class CircleCircleDetection : MonoBehaviour
 
         // Vector2.Distance automatically calculates the distance between two points
         // Alternatively, if we have a vector then we can access its magnitude (length) directly!
-        Vector2 lineSegment = position2 - position1;
-        float lineLength1 = lineSegment.magnitude;
-        float lineLength2 = Vector2.Distance(position1, position2);
-        Debug.Log(lineLength1);
-        Debug.Log(lineLength2);
+        //Vector2 lineSegment = position2 - position1;
+        //float lineLength1 = lineSegment.magnitude;
+        //float lineLength2 = Vector2.Distance(position1, position2);
+        //Debug.Log(lineLength1);
+        //Debug.Log(lineLength2);
         Debug.DrawLine(position1, position2);
 
         circle1.GetComponent<SpriteRenderer>().color = color;
