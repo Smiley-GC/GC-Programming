@@ -6,12 +6,15 @@ public class Loops : MonoBehaviour
 {
     // Homework task 2: use loops to spawn grenades in a border pattern (see blackboard task 2 image, 1%)
     public GameObject grenade;
+    public GameObject borderCircle;
     public Vector3 spawnPosition;
+
     void Start()
     {
-        TestWhileLoop();
-        TestForLoop();
-        SpawnGrenades(420);
+        //TestWhileLoop();
+        //TestForLoop();
+        //SpawnGrenades(420);
+        DrawBorder();
     }
 
     void TestWhileLoop()
@@ -49,6 +52,56 @@ public class Loops : MonoBehaviour
             Vector3 grenadePosition = spawnPosition + new Vector3(Random.Range(xMin, xMax), 0.0f, Random.Range(zMin, zMax));
             GameObject clone = Instantiate(grenade, grenadePosition, Quaternion.identity);
             Destroy(clone, 5.0f);
+        }
+    }
+
+    void DrawBorder()
+    {
+        float left = -10.0f;
+        float right = 10.0f;
+        float top = 5.0f;
+        float bottom = -5.0f;
+        int width = (int)Camera.main.orthographicSize * 4;
+        int height = (int)Camera.main.orthographicSize * 2;
+
+        // Top row:
+        {
+            float x = left;
+            for (int i = 0; i <= width; i++)
+            {
+                Instantiate(borderCircle, new Vector3(x, top, 0.0f), Quaternion.identity);
+                x += 1.0f;
+            }
+        }
+
+        // Bottom row:
+        {
+            float x = left;
+            for (int i = 0; i <= width; i++)
+            {
+                Instantiate(borderCircle, new Vector3(x, bottom, 0.0f), Quaternion.identity);
+                x += 1.0f;
+            }
+        }
+
+        // Left column:
+        {
+            float y = bottom;
+            for (int i = 0; i <= height; i++)
+            {
+                Instantiate(borderCircle, new Vector3(left, y, 0.0f), Quaternion.identity);
+                y += 1.0f;
+            }
+        }
+
+        // Right column:
+        {
+            float y = bottom;
+            for (int i = 0; i <= height; i++)
+            {
+                Instantiate(borderCircle, new Vector3(right, y, 0.0f), Quaternion.identity);
+                y += 1.0f;
+            }
         }
     }
 
