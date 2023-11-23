@@ -27,7 +27,9 @@ public class CircleCircleDetection : MonoBehaviour
         if (collision)
         {
             // Calculate mtv only if there's a collision
-            mtv = Vector2.zero; // replace this with actual calculations
+            // mtv = direction * depth
+            // depth = radiiSum - distance
+            mtv = Vector2.zero;
         }
         else
         {
