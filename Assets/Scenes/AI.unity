@@ -497,6 +497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1063119657}
+  bulletPrefab: {fileID: 7565388360935546848, guid: caa4f10bbd6bf214391c5d26b3f1a69e, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
