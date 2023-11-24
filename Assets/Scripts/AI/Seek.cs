@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Homework task 2: make the enemy shoot at the player when in proximity
+// Homework 9: Destroy ALL bullets if ANY bullets collide with the player using the bullets list.
 public class Seek : MonoBehaviour
 {
     public GameObject target;
     public GameObject bulletPrefab;
+    public List<GameObject> bullets = new List<GameObject>();
 
     float currentTime = 0.0f;
     float totalTime = 0.5f;
@@ -46,9 +47,22 @@ public class Seek : MonoBehaviour
                 GameObject bullet = Instantiate(bulletPrefab);
                 bullet.transform.position = transform.position + bulletDirection;
                 bullet.GetComponent<Rigidbody2D>().velocity = bulletDirection * speed * 5.0f;
+                bullets.Add(bullet);
                 currentTime = 0.0f;
             }
             currentTime += dt;
+
+            // Destroy bullet and remove from list if bullet is older than 1 second.
+            for (int i = 0; i < bullets.Count; i++)
+            {
+                GameObject bullet = bullets[i];
+                Bullet bulletData = bullet.GetComponent<Bullet>();
+                if (bulletData.age > 1.0f)
+                {
+                    Destroy(bullet);
+                    bullets.Remove(bullet);
+                }
+            }
         }
     }
 }
