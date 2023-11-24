@@ -7,14 +7,16 @@ using UnityEngine;
 public class Loops : MonoBehaviour
 {
     public GameObject grenadePrefab;
+    public GameObject borderCircle;
     public float verticalPosition;
     int grenadeCount = 256;
 
     void Start()
     {
-        TestWhileLoop();
-        TestForLoop();
-        SpawnGrenades(grenadeCount);
+        //TestWhileLoop();
+        //TestForLoop();
+        //SpawnGrenades(grenadeCount);
+        Homework7();
     }
 
     private void Update()
@@ -58,5 +60,30 @@ public class Loops : MonoBehaviour
                 Destroy(grenade, 5.0f);
             }
         }
+    }
+
+    void Homework7()
+    {
+        float size = Camera.main.orthographicSize;
+        float right = size * 2.0f;
+        float left = -size * 2.0f;
+        float top =  size;
+        float bot = -size;
+
+        // Top
+        for (float x = left; x <= right; x += 1.0f)
+            Instantiate(borderCircle, new Vector3(x, top, 0.0f), Quaternion.identity);
+
+        // Bottom
+        for (float x = left; x <= right; x += 1.0f)
+            Instantiate(borderCircle, new Vector3(x, bot, 0.0f), Quaternion.identity);
+
+        // Left
+        for (float y = bot; y <= top; y += 1.0f)
+            Instantiate(borderCircle, new Vector3(left, y, 0.0f), Quaternion.identity);
+
+        // Right
+        for (float y = bot; y <= top; y += 1.0f)
+            Instantiate(borderCircle, new Vector3(right, y, 0.0f), Quaternion.identity);
     }
 }
