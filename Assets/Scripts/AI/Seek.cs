@@ -51,17 +51,16 @@ public class Seek : MonoBehaviour
                 currentTime = 0.0f;
             }
             currentTime += dt;
+        }
 
-            // Destroy bullet and remove from list if bullet is older than 1 second.
-            for (int i = 0; i < bullets.Count; i++)
+        // Destroy bullet and remove from list if bullet is older than 1 second.
+        for (int i = 0; i < bullets.Count; i++)
+        {
+            if (bullets[i].GetComponent<Bullet>().age > 1.0f)
             {
-                GameObject bullet = bullets[i];
-                Bullet bulletData = bullet.GetComponent<Bullet>();
-                if (bulletData.age > 1.0f)
-                {
-                    Destroy(bullet);
-                    bullets.Remove(bullet);
-                }
+                Destroy(bullets[i]);
+                bullets.Remove(bullets[i]);
+                i--;
             }
         }
     }

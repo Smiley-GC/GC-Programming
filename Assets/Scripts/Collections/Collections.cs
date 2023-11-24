@@ -36,8 +36,6 @@ public class Collections : MonoBehaviour
         TestArrayAccess();
     }
 
-    
-
     void TestArrayAccess()
     {
         // Manual access
