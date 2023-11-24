@@ -6,6 +6,8 @@ public class CircleCircleTest : MonoBehaviour
 {
     public GameObject circle1;
     public GameObject circle2;
+    public GameObject cursor;
+    public GameObject projection;
 
     private void Start()
     {
@@ -42,10 +44,19 @@ public class CircleCircleTest : MonoBehaviour
 
     void Update()
     {
+        Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mouse.z = 0.0f;
+        cursor.transform.position = mouse;
+
+
         Vector2 position1 = circle1.transform.position;
         Vector2 position2 = circle2.transform.position;
         float radius1 = circle1.transform.localScale.x * 0.5f;
         float radius2 = circle2.transform.localScale.x * 0.5f;
+
+        Debug.DrawLine(Vector2.zero, position1, Color.red);
+        Debug.DrawLine(Vector2.zero, mouse, Color.green);
+        projection.transform.position = Vector3.Project(mouse, position1);
 
         // MTV resolves 1 from 2 (because it points from 2 to 1)
         Vector2 mtv = Vector2.zero;
