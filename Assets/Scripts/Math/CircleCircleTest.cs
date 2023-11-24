@@ -7,6 +7,22 @@ public class CircleCircleTest : MonoBehaviour
     public GameObject circle1;
     public GameObject circle2;
 
+    private void Start()
+    {
+        Vector2 A = new Vector2(2.0f, 3.0f);
+        Vector2 B = new Vector2(5.0f, 4.0f);
+        Vector2 direction = (B - A).normalized;
+        float distance1 = Vector2.Distance(A, B);
+        float distance2 = (B - A).magnitude;
+
+        // Two ways to get distance of a line segment:
+        // 1. Use Vector2.Distance on the start & end of line.
+        // 2. Turn the line into a vector by subtracting the two points, then calculate its magnitude.
+        Debug.Log(distance1);
+        Debug.Log(distance2);
+        Debug.Log(direction);
+    }
+
     // Homework 7: write a function to determine if two circles are overlapping
     // Recommendation: keep your functions pure math -- take in 2 positions and 2 radii as arguments
     // return the result of the collision as a boolean
