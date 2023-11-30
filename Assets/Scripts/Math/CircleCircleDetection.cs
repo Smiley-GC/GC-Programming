@@ -9,6 +9,16 @@ public class CircleCircleDetection : MonoBehaviour
     public GameObject cursor;
     public GameObject projection;
 
+    // Projects point P onto line A B
+    Vector3 ProjectPointLine(Vector3 P, Vector3 A, Vector3 B)
+    {
+        Vector3 AB = B - A;
+        Vector3 AP = P - A;
+        float t = Vector3.Dot(AB, AP) / Vector3.Dot(AB, AB);
+        t = Mathf.Clamp(t, 0.0f, 1.0f);
+        return A + AB * t;
+    }
+
     // Homework 8: Upgrade our CheckCollisionCircles function to resolve collision between two circles by applying the mtv.
     // Calculate the mtv's direction by determining the direction from 2 to 1 (subtract 1 from 2 then normalize the result)
     // Calculate the mtv's magnitude by determining penetration depth. Subtract radii sum by distance between centres.
@@ -58,11 +68,12 @@ public class CircleCircleDetection : MonoBehaviour
         circle1.transform.position += new Vector3(mtv.x, mtv.y, 0.0f);
         Color color = collision ? Color.green : Color.red;
 
-        Vector3 A = mouse;
-        Vector3 B = position1 - Vector2.zero;
-        Vector3 proj = Vector3.Project(A, B);
+        //Vector3 A = mouse;
+        //Vector3 B = position1 - Vector2.zero;
+        //Vector3 proj = Vector3.Project(A, B);
         Debug.DrawLine(Vector3.zero, mouse, Color.blue);
-        Debug.DrawLine(Vector3.zero, B, Color.red);
+        Debug.DrawLine(Vector3.zero, position1, Color.red);
+        Vector3 proj = ProjectPointLine(mouse, position1, Vector3.zero);
         projection.transform.position = proj;
 
         circle1.GetComponent<SpriteRenderer>().color = color;
