@@ -15,7 +15,7 @@ public class CircleCircleDetection : MonoBehaviour
     bool CheckCollisionCircles(Vector2 position1, float radius1, Vector2 position2, float radius2, out Vector2 mtv)
     {
         // Distance between position 1 and position 2
-        float distance = Vector2.Distance(position1, position2);
+        float distance = (position1 - position2).magnitude;
 
         // Direction from to position 2 to position 1
         Vector2 direction = (position1 - position2).normalized;
@@ -28,9 +28,8 @@ public class CircleCircleDetection : MonoBehaviour
         if (collision)
         {
             // Calculate mtv only if there's a collision
-            // mtv = direction * depth
-            // depth = radiiSum - distance
-            mtv = Vector2.zero;
+            float depth = radiiSum - distance;
+            mtv = direction * depth;
         }
         else
         {
