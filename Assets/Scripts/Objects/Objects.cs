@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
+// Classes are passed "by-reference" by default
 public class Character
 {
     public float health = 100.0f;
@@ -12,6 +13,12 @@ public class Character
     public float movementSpeed = 2.0f;
     public int score = 0;
     public string name = "";
+}
+
+// Structures are passed "by-value" (copied) by default
+public struct Test
+{
+    public int score;
 }
 
 public class Objects : MonoBehaviour
@@ -25,6 +32,21 @@ public class Objects : MonoBehaviour
         Debug.Log(c.movementSpeed);
         Debug.Log(c.score);
         Debug.Log(c.name);
+    }
+
+    void SetScore(Character character)
+    {
+        character.score = 69;
+    }
+
+    void SetScore(Test test)
+    {
+        test.score = 69;
+    }
+
+    void SetScore(ref Test test)
+    {
+        test.score = 69;
     }
 
     void Combat(Character player, Character ally, Character boss)
@@ -70,6 +92,13 @@ public class Objects : MonoBehaviour
         //PrintStats(ally);
         //PrintStats(boss);
         Combat(player, ally, boss);
+
+        Test test = new Test();
+        SetScore(test);     // Operates on a copy of test
+        SetScore(ref test); // Operates on test
+        SetScore(player);
+        Debug.Log(player.score);
+        Debug.Log(test.score);
     }
 
     // Update is called once per frame
