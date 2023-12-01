@@ -30,10 +30,8 @@ public class CircleCircleTest : MonoBehaviour
         bool collision = distance < radiiSum;
         if (collision)
         {
-            // mtv = direction * depth
-            // depth = radiiSum - distance
-            // We already have direction
-            mtv = Vector2.zero; // (replace with actual mtv formula)
+            float depth = radiiSum - distance;
+            mtv = direction * depth;
         }
         else
         {
@@ -47,7 +45,6 @@ public class CircleCircleTest : MonoBehaviour
         Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mouse.z = 0.0f;
         cursor.transform.position = mouse;
-
 
         Vector2 position1 = circle1.transform.position;
         Vector2 position2 = circle2.transform.position;
