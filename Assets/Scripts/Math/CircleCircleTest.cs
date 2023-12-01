@@ -36,6 +36,21 @@ public class CircleCircleTest : MonoBehaviour
         return A + AB * t;
     }
 
+    // Homework 10: complete this function
+    bool CheckCollisionCircleCapsule(Vector2 circlePosition, float circleRadius,
+        Vector2 capsulePosition, float capsuleRadius, float halfLength, out Vector2 mtv)
+    {
+        // 1. Determine top and bottom of capusle using CapsulePoints
+
+        // 2. Project the circle's position onto the line formed between the capsule top and bottom
+
+        // 3. Do circle-circle detection between the circle, and the projected position & capsule's radius
+
+        // (Replace this with actual code)
+        mtv = Vector2.zero;
+        return true;
+    }
+
     bool CheckCollisionCircles(Vector2 position1, float radius1, Vector2 position2, float radius2, out Vector2 mtv)
     {
         // Distance between position1 and position2
@@ -86,11 +101,18 @@ public class CircleCircleTest : MonoBehaviour
         Vector2 top, bot;
         Vector2 capsulePosition = capsule.transform.position;
         Vector2 capsuleDirection = capsule.transform.up;
+        float capusleRadius = capsule.transform.localScale.x * 0.5f;
         float halfLength = capsule.transform.localScale.y * 0.5f;
         CapsulePoints(capsulePosition, capsuleDirection, halfLength, out top, out bot);
         topCircle.transform.position = top;
         botCircle.transform.position = bot;
         capsuleProjection.transform.position = ProjectPointLine(mouse, top, bot);
+
+        // Color based on collision and translate circle1 by MTV!
+        bool capsuleCollision = CheckCollisionCircleCapsule(position1, radius1, capsulePosition, capusleRadius, halfLength, out mtv);
+        Color capsuleColor = capsuleCollision ? Color.red : Color.green;
+        capsule.GetComponent<SpriteRenderer>().color = capsuleColor;
+        circle1.transform.position += new Vector3(mtv.x, mtv.y, 0.0f);
 
         // "ternary" operator (the question mark) assigned based on a true/false value.
         // It assigns to the left of the : if true, otherwise it assigns to the right of the : if false.
