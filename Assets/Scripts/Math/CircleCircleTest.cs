@@ -12,7 +12,8 @@ public class CircleCircleTest : MonoBehaviour
     public GameObject botCircle;
 
     public GameObject cursor;
-    public GameObject projection;
+    public GameObject circleProjection;
+    public GameObject capsuleProjection;
 
     private void Start()
     {
@@ -23,6 +24,16 @@ public class CircleCircleTest : MonoBehaviour
     {
         top = position + direction * halfLength;
         bot = position - direction * halfLength;
+    }
+
+    // Project point P onto line AB
+    Vector2 ProjectPointLine(Vector2 P, Vector2 A, Vector2 B)
+    {
+        Vector2 AB = B - A;
+        Vector2 AP = P - A;
+        float t = Vector2.Dot(AB, AP) / Vector2.Dot(AB, AB);
+        t = Mathf.Clamp01(t);
+        return A + AB * t;
     }
 
     bool CheckCollisionCircles(Vector2 position1, float radius1, Vector2 position2, float radius2, out Vector2 mtv)
@@ -61,7 +72,7 @@ public class CircleCircleTest : MonoBehaviour
 
         Debug.DrawLine(Vector2.zero, position1, Color.red);
         Debug.DrawLine(Vector2.zero, mouse, Color.green);
-        projection.transform.position = Vector3.Project(mouse, position1);
+        circleProjection.transform.position = ProjectPointLine(mouse, Vector2.zero, position1);
 
         // MTV resolves 1 from 2 (because it points from 2 to 1)
         Vector2 mtv = Vector2.zero;
@@ -79,6 +90,7 @@ public class CircleCircleTest : MonoBehaviour
         CapsulePoints(capsulePosition, capsuleDirection, halfLength, out top, out bot);
         topCircle.transform.position = top;
         botCircle.transform.position = bot;
+        capsuleProjection.transform.position = ProjectPointLine(mouse, top, bot);
 
         // "ternary" operator (the question mark) assigned based on a true/false value.
         // It assigns to the left of the : if true, otherwise it assigns to the right of the : if false.
