@@ -6,17 +6,25 @@ public class CircleCircleTest : MonoBehaviour
 {
     public GameObject circle1;
     public GameObject circle2;
+
+    public GameObject capsule;
+    public GameObject topCircle;
+    public GameObject botCircle;
+
     public GameObject cursor;
     public GameObject projection;
 
     private void Start()
     {
-        //VectorReview();
+        Homework9();
     }
 
-    // Homework 8: Upgrade the previous function so that it calculates the MTV ("minimum translation vector").
-    // If the two circles are overlapping, apply the mtv to circle 1 to resolve the collision!
-    // Remember, mtv resolves 1 FROM 2
+    void CapsulePoints(Vector2 position, Vector2 direction, float halfLength, out Vector2 top, out Vector2 bot)
+    {
+        top = position + direction * halfLength;
+        bot = position - direction * halfLength;
+    }
+
     bool CheckCollisionCircles(Vector2 position1, float radius1, Vector2 position2, float radius2, out Vector2 mtv)
     {
         // Distance between position1 and position2
@@ -64,6 +72,14 @@ public class CircleCircleTest : MonoBehaviour
         circle1.GetComponent<SpriteRenderer>().color = color;
         circle2.GetComponent<SpriteRenderer>().color = color;
 
+        Vector2 top, bot;
+        Vector2 capsulePosition = capsule.transform.position;
+        Vector2 capsuleDirection = capsule.transform.up;
+        float halfLength = capsule.transform.localScale.y * 0.5f;
+        CapsulePoints(capsulePosition, capsuleDirection, halfLength, out top, out bot);
+        topCircle.transform.position = top;
+        botCircle.transform.position = bot;
+
         // "ternary" operator (the question mark) assigned based on a true/false value.
         // It assigns to the left of the : if true, otherwise it assigns to the right of the : if false.
         // Its equivalent to the following code:
@@ -77,19 +93,11 @@ public class CircleCircleTest : MonoBehaviour
         //}
     }
 
-    void VectorReview()
+    void Homework9()
     {
-        Vector2 A = new Vector2(2.0f, 3.0f);
-        Vector2 B = new Vector2(5.0f, 4.0f);
-        Vector2 direction = (B - A).normalized;
-        float distance1 = Vector2.Distance(A, B);
-        float distance2 = (B - A).magnitude;
-
-        // Two ways to get distance of a line segment:
-        // 1. Use Vector2.Distance on the start & end of line.
-        // 2. Turn the line into a vector by subtracting the two points, then calculate its magnitude.
-        Debug.Log(distance1);
-        Debug.Log(distance2);
-        Debug.Log(direction);
+        float answer1 = Vector2.Dot(new Vector2(4.0f, 4.0f), new Vector2(-4.0f, 4.0f));
+        Vector3 answer2 = Vector3.Project(new Vector3(5.0f, 6.0f), new Vector3(-3.0f, 7.0f));
+        Debug.Log(answer1);
+        Debug.Log(answer2);
     }
 }
