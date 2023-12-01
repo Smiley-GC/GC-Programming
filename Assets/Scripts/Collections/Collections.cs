@@ -22,8 +22,8 @@ public class Collections : MonoBehaviour
         }
     }
 
-    public int[] manualArray = new int[20];
-    public int[] automaticArray = { 1, 2, 3, 4, 5 };
+    int[] automaticArray = { 1, 2, 3, 4, 5 };
+    int[] manualArray = new int[20];
     int index = 0;
 
     // Start is called before the first frame update
@@ -73,9 +73,19 @@ public class Collections : MonoBehaviour
         }
     }
 
+    Vector3 MoveObject(Vector3 direction, float speed)
+    {
+        return direction * speed * Time.deltaTime;
+    }
+
     void Update()
     {
         // TODO -- loop through MoveObject here for homework 8
+        for (int i = 0; i < gameObjects1.Length; i++)
+        {
+            Vector3 direction = gameObjects1[i].transform.forward;
+            gameObjects1[i].transform.position += MoveObject(direction, 2.0f);
+        }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
