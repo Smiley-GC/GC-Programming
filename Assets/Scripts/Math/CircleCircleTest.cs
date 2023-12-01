@@ -48,7 +48,7 @@ public class CircleCircleTest : MonoBehaviour
 
         // (Replace this with actual code)
         mtv = Vector2.zero;
-        return true;
+        return false;
     }
 
     bool CheckCollisionCircles(Vector2 position1, float radius1, Vector2 position2, float radius2, out Vector2 mtv)
@@ -110,7 +110,7 @@ public class CircleCircleTest : MonoBehaviour
 
         // Color based on collision and translate circle1 by MTV!
         bool capsuleCollision = CheckCollisionCircleCapsule(position1, radius1, capsulePosition, capusleRadius, halfLength, out mtv);
-        Color capsuleColor = capsuleCollision ? Color.red : Color.green;
+        Color capsuleColor = capsuleCollision ? Color.green : Color.red;
         capsule.GetComponent<SpriteRenderer>().color = capsuleColor;
         circle1.transform.position += new Vector3(mtv.x, mtv.y, 0.0f);
 
