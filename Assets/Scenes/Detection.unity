@@ -217,6 +217,7 @@ GameObject:
   m_Component:
   - component: {fileID: 497598521}
   - component: {fileID: 497598520}
+  - component: {fileID: 497598522}
   m_Layer: 0
   m_Name: CollisionDemo
   m_TagString: Untagged
@@ -254,6 +255,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &497598522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 497598519}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feb197f11c72e22428a94fbf9a494e74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rectangle: {fileID: 370668415}
+  circle: {fileID: 1922774512}
 --- !u!1 &1035929765
 GameObject:
   m_ObjectHideFlags: 0
