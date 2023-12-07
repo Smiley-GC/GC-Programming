@@ -56,11 +56,8 @@ public class CircleRectangleProjection : MonoBehaviour
     // Project circle onto all 4 rectangle axes then do a point-circle check against the nearest projection!
     bool CheckCollisionCircleRect(Vector2 circle, float radius, Vector2 rect, Vector2 extents, Vector2 forward, Vector2 perpendicular)
     {
-        float hw = extents.x;   // half-width
-        float hh = extents.y;   // half-height
-        Vector2 a = forward * hw;
-        Vector2 b = perpendicular * hh;
-
+        Vector2 a = forward * extents.x;
+        Vector2 b = perpendicular * extents.y;
         List<Vector2> points = new List<Vector2>
         {
             rect + a + b,   // top left
