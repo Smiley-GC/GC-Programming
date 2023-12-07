@@ -10,4 +10,6 @@ public class Bullet : MonoBehaviour
     {
         age += Time.deltaTime;
     }
+
+
 }
