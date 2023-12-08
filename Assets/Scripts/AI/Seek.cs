@@ -10,12 +10,12 @@ public class Seek : MonoBehaviour
     public List<GameObject> bullets = new List<GameObject>();
 
     float currentTime = 0.0f;
-    float totalTime = 0.5f;
+    float totalTime = 0.05f;
 
     float speed = 2.0f;
     bool targetDetected = false;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.tag.Equals("Projectile"))
         {
@@ -23,7 +23,7 @@ public class Seek : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    void OnTriggerExit2D(Collider2D collision)
     {
         if (!collision.tag.Equals("Projectile"))
         {
@@ -58,10 +58,24 @@ public class Seek : MonoBehaviour
         {
             if (bullets[i].GetComponent<Bullet>().age > 1.0f)
             {
-                Destroy(bullets[i]);
-                bullets.Remove(bullets[i]);
+                RemoveBullet(i);
                 i--;
             }
         }
+    }
+
+    public void RemoveAllBullets()
+    {
+        for (int i = 0; i < bullets.Count; i++)
+        {
+            RemoveBullet(i);
+            i--;
+        }
+    }
+
+    public void RemoveBullet(int index)
+    {
+        Destroy(bullets[index]);
+        bullets.Remove(bullets[index]);
     }
 }
