@@ -17,8 +17,9 @@ public class PhysicsSystem : MonoBehaviour
     List<Particle> particles = new List<Particle>();    // Physics
     List<GameObject> objects = new List<GameObject>();  // Rendering
 
+    int fireworkCount = 64;
     float currentTime = 0.0f;
-    float totalTime = 1.0f;
+    float totalTime = 0.5f;
 
     void Add(Particle particle)
     {
@@ -54,7 +55,7 @@ public class PhysicsSystem : MonoBehaviour
 
     void Start()
     {
-        CreateBatch(Vector2.zero, 16);
+        CreateBatch(Vector2.zero, fireworkCount);
     }
 
     // pi = 5m, v = 2.5ms, t = 2s
@@ -97,9 +98,9 @@ public class PhysicsSystem : MonoBehaviour
         if (currentTime > totalTime)
         {
             currentTime = 0.0f;
-            CreateBatch(new Vector2(Random.Range(-20.0f, 20.0f), Random.Range(-10.0f, 10.0f)), 16);
+            CreateBatch(new Vector2(Random.Range(-20.0f, 20.0f), Random.Range(-10.0f, 10.0f)), fireworkCount);
             totalTime += Random.Range(-0.5f, 0.5f);
-            totalTime = Mathf.Max(0.25f, totalTime);
+            totalTime = Mathf.Max(0.1f, totalTime);
         }
     }
 }
