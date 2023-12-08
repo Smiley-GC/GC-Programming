@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class CircleCircleTest : MonoBehaviour
 {
@@ -38,7 +39,7 @@ public class CircleCircleTest : MonoBehaviour
 
     // Homework 10: complete this function
     bool CheckCollisionCircleCapsule(Vector2 circlePosition, float circleRadius,
-        Vector2 capsulePosition, float capsuleRadius, float halfLength, out Vector2 mtv)
+        Vector2 capsulePosition, Vector2 capsuleDirection, float capsuleRadius, float halfLength, out Vector2 mtv)
     {
         // 1. Determine top and bottom of capusle using CapsulePoints
 
@@ -109,7 +110,7 @@ public class CircleCircleTest : MonoBehaviour
         capsuleProjection.transform.position = ProjectPointLine(mouse, top, bot);
 
         // Color based on collision and translate circle1 by MTV!
-        bool capsuleCollision = CheckCollisionCircleCapsule(position1, radius1, capsulePosition, capusleRadius, halfLength, out mtv);
+        bool capsuleCollision = CheckCollisionCircleCapsule(position1, radius1, capsulePosition, capsuleDirection, capusleRadius, halfLength, out mtv);
         Color capsuleColor = capsuleCollision ? Color.green : Color.red;
         capsule.GetComponent<SpriteRenderer>().color = capsuleColor;
         circle1.transform.position += new Vector3(mtv.x, mtv.y, 0.0f);
