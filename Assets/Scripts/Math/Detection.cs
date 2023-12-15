@@ -2,89 +2,82 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// *Programming* homework 10:
-// Change the CheckCollisionCircles function to take in two Circle objects.
-// Each circle should store a position and a radius.
-
 public class Circle
 {
     public Vector2 position;
+    public Vector2 direction;
     public float radius;
+
+    public Vector2 Bottom()
+    {
+        return position - direction * radius;
+    }
 }
 
 public class Rectangle
 {
     public Vector2 position;
-    public Vector2 extents;
+    public Vector2 direction;
+    public float halfWidth;
+    public float halfHeight;
+
+    public Vector2 Bottom()
+    {
+        return position - direction * halfHeight;
+    }
+}
+
+public class Capsule
+{
+    public Vector2 position;
+    public Vector2 direction;
+    public float radius;
+    public float halfLength;
+
+    public Vector2 Bottom()
+    {
+        return position - direction * (halfLength + radius);
+    }
 }
 
 public class Detection : MonoBehaviour
 {
-    public GameObject recGO;
-    public GameObject circle1GO;
-    public GameObject circle2GO;
+    public GameObject rectangleGO;
+    public GameObject circleGO;
+    public GameObject capsuleGO;
 
-    Rectangle rec = new Rectangle();
-    Circle circle1 = new Circle();
-    Circle circle2 = new Circle();
+    public GameObject rectangleBottom;
+    public GameObject circleBottom;
+    public GameObject capsuleBottom;
 
+    Rectangle rectangle = new Rectangle();
+    Circle circle = new Circle();
+    Capsule capsule = new Capsule();
+
+    Vector2 vel = Vector2.zero;
     void Update()
     {
-        rec.position = recGO.transform.position;
-        rec.extents = new Vector2(recGO.transform.localScale.x * 0.5f, recGO.transform.localScale.y * 0.5f);
-        circle1.position = circle1GO.transform.position;
-        circle2.position = circle2GO.transform.position;
-        circle1.radius = circle1GO.transform.localScale.x * 0.5f;
-        circle2.radius = circle2GO.transform.localScale.x * 0.5f;
+        float dt = Time.deltaTime;
+        Vector2 acc = new Vector2(0.0f, Physics.gravity.y);
+        vel = vel + acc * dt;
+        Vector2 positionDelta = vel * dt;
+        rectangleGO.transform.position += new Vector3(positionDelta.x, positionDelta.y);
 
-        // 1. Determine all overlapping pairs
-        bool circle1Rec = CheckCollisionCircleRec(circle1, rec);
-        bool circle2Rec = CheckCollisionCircleRec(circle2, rec);
-        bool circle1circle2 = CheckCollisionCircles(circle1.position, circle1.radius, circle2.position, circle2.radius);
+        rectangle.position = rectangleGO.transform.position;
+        rectangle.direction = rectangleGO.transform.up;
+        rectangle.halfWidth = rectangleGO.transform.localScale.x * 0.5f;
+        rectangle.halfHeight = rectangleGO.transform.localScale.y * 0.5f;
+        rectangleBottom.transform.position = rectangle.Bottom();
 
-        // 2. Colour based on overlap
-        Color recColor = Color.red;
-        Color circle1Color = Color.red;
-        Color circle2Color = Color.red;
+        circle.position = circleGO.transform.position;
+        circle.direction = circleGO.transform.up;
+        circle.radius = circleGO.transform.localScale.x * 0.5f;
+        circleBottom.transform.position = circle.Bottom();
 
-        if (circle1Rec)
-        {
-            recColor = Color.green;
-            circle1Color = Color.green;
-        }
-
-        if (circle2Rec)
-        {
-            recColor = Color.green;
-            circle2Color = Color.green;
-        }
-
-        if (circle1circle2)
-        {
-            circle1Color = Color.green;
-            circle2Color = Color.green;
-        }
-
-        // 3. Shader with colors
-        recGO.GetComponent<SpriteRenderer>().color = recColor;
-        circle1GO.GetComponent<SpriteRenderer>().color = circle1Color;
-        circle2GO.GetComponent<SpriteRenderer>().color = circle2Color;
-    }
-
-    // Homework 10 CheckCollisionCircles should look like this:
-    // bool CheckCollisionCircles(Circle circle1, Circle circle2) { ... }
-    // (Follow the same pattern that I did to CheckCollisionCircleRec).
-
-    bool CheckCollisionCircleRec(Circle circle, Rectangle rec)
-    {
-        Vector2 nearest = circle.position;
-        nearest.x = Mathf.Clamp(nearest.x, rec.position.x - rec.extents.x, rec.position.x + rec.extents.x);
-        nearest.y = Mathf.Clamp(nearest.y, rec.position.y - rec.extents.y, rec.position.y + rec.extents.y);
-        return Vector2.Distance(nearest, circle.position) <= circle.radius;
-    }
-
-    bool CheckCollisionCircles(Vector2 circle1, float radius1, Vector2 circle2, float radius2)
-    {
-        return Vector2.Distance(circle1, circle2) <= radius1 + radius2;
+        capsule.position = capsuleGO.transform.position;
+        capsule.direction = capsuleGO.transform.up;
+        capsule.radius = rectangleGO.transform.localScale.x * 0.25f;
+        capsule.halfLength = rectangleGO.transform.localScale.y * 0.5f;
+        capsuleBottom.transform.position = capsule.Bottom();
     }
 }
